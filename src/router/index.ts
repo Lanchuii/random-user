@@ -9,9 +9,10 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage
   },
   {
-    path: '/about',
-    name: 'about',
-    component: UserPage
+    path: '/userPage/:id',
+    name: 'userPage',
+    component: UserPage,
+    props: true
   }
 ]
 
