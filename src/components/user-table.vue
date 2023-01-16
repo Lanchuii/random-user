@@ -37,14 +37,14 @@ export default defineComponent({
     props: {
         userData: {
             type: Object as PropType<IUserData[]>,
-            required: true,
-            default: null
+            required: true
         }
     },
     setup(props, {emit}) {
         function viewProfile(index: number){
             emit('view-profile', index)
         }
+        
         return { 
             viewProfile,
             props

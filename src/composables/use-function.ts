@@ -1,34 +1,28 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import IUserData from '@/types/user-data'
+import useFetch from './use-fetch'
+import apiNames from '@/constants/api-names'
 
 const userData = ref<IUserData[]>([])
 const profileData = ref<IUserData>()
 
-export function useFunction() {        
+export function useFunction() {    
     function viewProfile(index: number){
         profileData.value = userData.value[index]
         console.log(profileData)
     }
-    
-    const fullName = computed(()=>{
-        return profileData.value?.name.first + ' ' + profileData.value?.name.last
-      })
-
-    const address = computed(()=>{
-        return profileData.value?.location.city + ', ' + profileData.value?.location.country
-      })
-
     async function getUsers(userNum: number, userGender: string){
-        const users = await fetch(`https://randomuser.me/api/?results=${userNum}&gender=${userGender}`)
-        const json = await users.json()
+        const paramsObj = {results: userNum.toString(), gender: userGender}
+        const searchParams = new URLSearchParams(paramsObj)
+        const { json } = await useFetch(`${apiNames.randomUser}/?${searchParams}`)
         userData.value = json.results
+
+        console.log(userData.value)
     }
     return {
         viewProfile,
         getUsers,
         userData,
-        profileData,
-        fullName,
-        address
+        profileData
     }
 }

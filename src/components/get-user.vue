@@ -33,7 +33,6 @@ export default defineComponent({
 
         function getUsers(num: number, gender: string){
             emit('get-user', num, gender)
-
         }
         return { 
             getUsers,
