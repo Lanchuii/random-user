@@ -1,12 +1,19 @@
 interface IUserData{
-    index: number
     gender: string,
     name: {
         title: string,
         first: string,
         last: string
     }
-    location: string,
+    dob: {
+        date: string,
+        age: string
+    },
+    location: {
+        country: string,
+        city: string
+    },
+    phone: string,
     email: string,
     picture: {
         large: string,
